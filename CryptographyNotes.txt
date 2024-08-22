@@ -1,0 +1,68 @@
+Cryptography introduction
+Xudong Zhang -- Office Hours Tues/Thurs 10:00-12:30 Hodge 230 
+Fall '24 Upstate
+
+Email: xudongz@uscupstate.edu
+
+
+Textbook
+Cryptography and network security ISBN: 9780135764039
+Cybersecurity All-in-one for Dummies ISBN: 9781394152858 
+Cybersecurity Essentials ISBN: 9781119362395
+
+Final Project in python/C++/Java
+
+Topics
+
+Unit 1. Introduction
+Unit 2. Setup lab environment for cryptography
+Unit 3. Symmetric-key cryptography 
+Unit 4. Stream ciphers 
+Unit 5. Advanced Encryption Standard 
+Unit 6. Password-based encryption 
+Unit 7. Public-key cryptography 
+Unit 8. Session-key encryption 
+Online Quiz 2
+Unit 9. Exam 1 Review Exam 1
+Unit 10. Digital signatures 
+Unit 11. Hash functions 
+Online Quiz 3
+Unit 12. File encryption
+Unit 13. Authentication
+Unit 14. Authentication
+Unit 15. RSA encryption implementation 
+Unit 16. Exam 2 Review 
+
+
+5+ Hands on lab/homework assignments
+    15% of final grade in total
+Attendance 
+    5% of final grade
+Final Project
+    20% of final grade
+    5-6 students
+    design a symmetric/asymmetric key system or algorithm (Clear text -> Cipher text)
+    Submit 1 Report and code (code is v. important)
+
+Quiz 1 
+    5% of final grade
+    Similar questions to Exam 1     
+
+Review Lectures
+
+Exam 1 
+    Midterm 
+    20% of final grade
+
+Quiz 2 
+    5% of final grade
+    Similar questions to Exam 2
+
+Review Lectures
+
+Exam 2 
+    Final 
+    30% of final grade
+    Before Thanksgiving (Unsepecified Date)
+
+Modular is going to be important
