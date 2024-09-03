@@ -5,13 +5,16 @@
 #*** | |    / _` | '_ \   | |                         ***#
 #*** | |___| (_| | |_) |  | |                         ***#
 #*** |______\__,_|_.__/   |_|                         ***#
+#***                                                  ***#
 #*** Lab 1: Symmetric encryption and decryption       ***#
 #*** Due 09/07/2024                                   ***#
 #*** By Jean-Luc Robitaille                           ***#
+#***                                                  ***#
+#*** Simple XOR encryption/decryption program         ***#
+#*** V2 (After it was modded to include bytearrays)  ***#
 #********************************************************#
 #
 #
-import binstr
 message=''
 message_bin=0
 key=''
@@ -19,53 +22,78 @@ key_bin=0
 #
 #
 #
+def tobinary(input):
+    byte_data=bytearray(input,'utf-8') # Converts input to byte array
+    bits=bin(int.from_bytes(byte_data,'big')) # Converts byte array to bits
+    return bits;
 #
 #
-def xor_cryptography(m_bin,k_bin): # m_bin is the message in binary     k_bin is the key in binary
-    key_count=0
-    count=0
-    output=''
+#
+#
+#
+def tostring(input):
+    input = input[2:] # Strips 0b from the input
+    #
+    padded_length = (len(input) + 7) // 8 * 8 # Calculate the length needed to Ensure the binary data's length is a multiple of 8
+    byte_length = (padded_length // 8) #Determine the length of the integer in bytes
+    #
+    input = input.zfill(padded_length)  # Fills in the string with leading zeroes to make its length a multiple of 8
+    integer = int(input, 2) #Convert the padded string back to an integer
+    #
+    #
+    byte_data = integer.to_bytes(byte_length, 'big')    #Converts the integer to a bytearray
+    #
+    result = byte_data.decode('utf-8')  #Decodes the byte array into a UTF-8 String
+    return result
+#
+#
+#
+#
+#
+def xor_cryptography(m_bin,k_bin): # m_bin is the message in binary     k_bin is the key in binary    
+    key_count=2     # Starts looping through the binaries after 0b
+    count=2         #
+    output=''   #Initializes output as a blank array
     while count<len(m_bin):
             if len(k_bin)-1 <= key_count:       # Ensures the counter does not become greater than the length of the key in binary
-                key_count=0                     #
+                key_count=2                     #
             else:                               #
                 key_count=key_count+1           #
-            if bin(int(m_bin[count]))!=bin(int(k_bin[key_count])):      # outputs the logical equivelant of XOR between the 
-                output=output+"1"                                       # current digit of the message binary and the current 
-            else:                                                       # digit of the key binary
-                output=output+"0"                                       #
+            output=output+str(int(m_bin[count])^int(k_bin[key_count]))  # applies XOR to the current digit of each binary and appends it to output 
             count=count+1
+    output="0b"+output
     return output
 #
 #
 #
 #
 #
-def inputMessage():
-    print("\n\nPlease enter your Plaintext Message:")
-    message=input('')
-    message_bin=binstr.str_to_b(message)
-    return message, message_bin
+def inputMessage():                                     # Function to minimize the amount of reused code when inputting the message
+    print("\n\nPlease enter your Plaintext Message:")   #
+    message=input('')                                   #
+    message_bin=tobinary(message)                       #
+    print(tostring(message_bin))
+    return message, message_bin                         #
 #
 #
 #
 #
 #
-def inputEncryptedbin():
-    print("\n\nPlease enter your Encrypted Message:")
-    message_bin=input('')
-    message=binstr.b_to_str(message_bin)
-    return message, message_bin
+def inputEncryptedbin():                                # Function to minimize the amount of reused code when inputting the encrypted binary
+    print("\n\nPlease enter your Encrypted Message:")   #
+    message_bin=input('')                               #
+    message=tostring(message_bin)                #
+    return message, message_bin                         #
 #
 #
 #
 #
 #
-def inputkey():
-    print("\n\nPlease enter your key:")
-    key=input('')
-    key_bin=binstr.str_to_b(key)
-    return key,key_bin
+def inputkey():                                         # Function to minimize the amount of reused code when inputting the key
+    print("\n\nPlease enter your key:")                 #
+    key=input('')                                       #
+    key_bin=tobinary(key)                        #
+    return key,key_bin                                  #
 #
 #
 #
@@ -154,7 +182,7 @@ def main():
             if key_bin==0: # Ensure the key is present
                 key,key_bin=inputkey()
             #
-            print("Decoded Message: ",binstr.b_to_str(xor_cryptography(message_bin,key_bin)))
+            print("Decoded Message: ",tostring(xor_cryptography(message_bin,key_bin)))
             input('\nPress Enter to continue')
             #
             #
