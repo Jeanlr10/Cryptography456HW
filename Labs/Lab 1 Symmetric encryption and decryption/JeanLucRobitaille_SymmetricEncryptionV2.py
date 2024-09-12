@@ -15,10 +15,6 @@
 #********************************************************#
 #
 #
-message=''
-message_bin=0
-key=''
-key_bin=0
 #
 #
 #
@@ -33,6 +29,7 @@ def tobinary(input):
 #
 def tostring(input):
     input = input[2:] # Strips 0b from the input
+    print(input)
     #
     padded_length = (len(input) + 7) // 8 * 8 # Calculate the length needed to Ensure the binary data's length is a multiple of 8
     byte_length = (padded_length // 8) #Determine the length of the integer in bytes
@@ -41,8 +38,10 @@ def tostring(input):
     integer = int(input, 2) #Convert the padded string back to an integer
     #
     #
+    print(integer)
     byte_data = integer.to_bytes(byte_length, 'big')    #Converts the integer to a bytearray
     #
+    print(byte_data)
     result = byte_data.decode('utf-8')  #Decodes the byte array into a UTF-8 String
     return result
 #
@@ -82,7 +81,7 @@ def inputMessage():                                     # Function to minimize t
 def inputEncryptedbin():                                # Function to minimize the amount of reused code when inputting the encrypted binary
     print("\n\nPlease enter your Encrypted Message:")   #
     message_bin=input('')                               #
-    message=tostring(message_bin)                #
+    message="Unable to display, Message Encrypted"
     return message, message_bin                         #
 #
 #
@@ -100,6 +99,10 @@ def inputkey():                                         # Function to minimize t
 #
 #
 def main():
+    message=''
+    message_bin=0
+    key=''
+    key_bin=0
     keepgoing=True
     while keepgoing:
         print("***************************************************************")
@@ -110,12 +113,11 @@ def main():
         print("*       1: Enter Plaintext Message                            *")
         print("*       2: View Message in Binary                             *")
         print("*       3: Enter Encrypted Message                            *")
-        print("*       4: Attempt to View Encrypted Message in ASCII         *")
-        print("*       5: Enter Key                                          *")
-        print("*       6: View Key in Binary                                 *")
-        print("*       7: Encrypt Message                                    *")
-        print("*       8: Decrypt Message                                    *")
-        print("*       9: Exit                                               *")
+        print("*       4: Enter Key                                          *")
+        print("*       5: View Key in Binary                                 *")
+        print("*       6: Encrypt Message                                    *")
+        print("*       7: Decrypt Message                                    *")
+        print("*       8: Exit                                               *")
         print("*                                                             *")
         print("***************************************************************")
         choice=input()
@@ -142,20 +144,11 @@ def main():
             message,message_bin=inputEncryptedbin()
             #
             #
-        elif choice == 4: # View Encrypted binary as ASCII
-            #
-            if message_bin==0: # Ensure the encrypted binary is present
-                message,message_bin=inputEncryptedbin()
-            #
-            print("\nEncrypted Message binary: ",message_bin,"\nEncrypted Message in ASCII: ",message)
-            input('\nPress Enter to continue')
-            #
-            #
-        elif choice == 5: # Enter Key
+        elif choice == 4: # Enter Key
             key,key_bin=inputkey()
             #
             #
-        elif choice == 6: # View Key as Binary
+        elif choice == 5: # View Key as Binary
             #
             if key=='': # Ensure the key is present
                 key,key_bin=inputkey()
@@ -164,7 +157,7 @@ def main():
             input('\nPress Enter to continue')
             #
             #
-        elif choice == 7: # Encrypt Message
+        elif choice == 6: # Encrypt Message
             #
             if message_bin==0: # Ensure the message is present
                 message,message_bin=inputMessage()
@@ -175,7 +168,7 @@ def main():
             input('\nPress Enter to continue')
             #
             #
-        elif choice == 8: # Decrypt Message
+        elif choice == 7: # Decrypt Message
             #
             if message_bin==0:
                 message,message_bin=inputEncryptedbin()
@@ -186,7 +179,7 @@ def main():
             input('\nPress Enter to continue')
             #
             #
-        elif choice == 9: # Exit
+        elif choice == 8: # Exit
             #
             print("Goodbye!")
             keepgoing=False
