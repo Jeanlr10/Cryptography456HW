@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+	<title>PyScript Demo</title>
+</head>
+<body>
+	<h1>Hello,
+	<py-script>
+		name = input("what is your name")
+		print(name)
+        file = open("readme.txt","w")
+        file.write("Hello World!")
+        file.close
+	</py-script> 
+	</h1>
+</body>
+</html>
